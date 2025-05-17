@@ -22,6 +22,19 @@ npm run dev
 
 Abre `http://localhost:5173` para verlo en el navegador.
 
+
+5. Actualizar github/pages
+```
+npm run deploy
+```
+
+6. subir cambios
+```
+git add .
+git commit -m "mensaje"
+git push origin main --force
+```
+
 ---
 
 ## 🧪 Ejecutar pruebas

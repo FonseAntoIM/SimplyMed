@@ -5,16 +5,18 @@
 # 📌 RÚBRICA → ¿Cómo se cumple en este proyecto? 
 
 
-Criterio	Implementación específica en SimplyMed
-SPA con React Router	App.jsx define rutas con BrowserRouter, Routes y Route. Rutas: /, /recetas, /nueva, /agenda, /expediente, *.
-JSX + props + render dinámico	RecetaCard.jsx recibe receta por props. Se renderizan dinámicamente en Recetas.jsx usando .map().
-Hooks (useState, useEffect)	En NuevaReceta.jsx se usan useState para controlar inputs y useEffect para side effects futuros.
-Custom Hook	useRecetas.js encapsula lógica del contexto: devuelve recetas, funciones y stats.
-Context + useReducer	RecetaContext.jsx maneja el estado global. Se usa en Recetas, NuevaReceta, Agenda y Expediente.
-Portal con Modal	Modal.jsx usa ReactDOM.createPortal. Se activa desde Recetas.jsx para ver detalles de receta.
-Estilos y validaciones visuales	Uso de Bootstrap en formularios, tablas y cards. Clases dinámicas como is-invalid para campos requeridos.
-Pruebas unitarias	RecetaCard.test.jsx: Verifica renderizado. NuevaReceta.test.jsx: Simula el flujo completo con vi.fn().
-Archivo README y bitácora	README_SimplyMed_Entrega.md contiene: estructura, tecnologías, pruebas, capturas, fases de desarrollo.
+| Criterio                         | Implementación específica en SimplyMed |
+|----------------------------------|----------------------------------------|
+| **SPA con React Router**         | `App.jsx` define rutas con `BrowserRouter`, `Routes` y `Route`. Rutas: `/`, `/recetas`, `/nueva`, `/agenda`, `/expediente`, `*`. |
+| **JSX + props + render dinámico**| `RecetaCard.jsx` recibe `receta` por props. Se renderizan dinámicamente en `Recetas.jsx` usando `.map()`. |
+| **Hooks (`useState`, `useEffect`)** | En `NuevaReceta.jsx` se usan `useState` para controlar inputs y `useEffect` para futuros efectos. |
+| **Custom Hook**                  | `useRecetas.js` encapsula lógica del contexto: devuelve recetas, funciones y estadísticas. |
+| **Context + useReducer**         | `RecetaContext.jsx` maneja el estado global. Se usa en `Recetas`, `NuevaReceta`, `Agenda` y `Expediente`. |
+| **Portal con Modal**             | `Modal.jsx` usa `ReactDOM.createPortal`. Se activa desde `Recetas.jsx` para mostrar detalles. |
+| **Estilos y validaciones**       | Uso de Bootstrap en formularios, tablas y tarjetas. Clases dinámicas como `is-invalid` para campos requeridos. |
+| **Pruebas unitarias**            | `RecetaCard.test.jsx`: Verifica renderizado. `NuevaReceta.test.jsx`: Simula flujo completo con `vi.fn()`. |
+| **Archivo README y bitácora**    | `README_SimplyMed_Entrega.md` documenta estructura, tecnologías, pruebas, capturas y fases de desarrollo. |
+
 
 ---
 
