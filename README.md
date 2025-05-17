@@ -27,6 +27,8 @@ Aplicación web tipo SPA desarrollada con React que permite a pacientes registra
 - Expediente clínico con estadísticas básicas
 - Navegación global (`Navbar`) usando `Link` y `NavLink`
 
+### Documentacion
+![TODOs](docs/TODO.md)  ![Como Funciona](docs/ComoFunciona.md)
 ---
 
 ## 📷 Capturas
