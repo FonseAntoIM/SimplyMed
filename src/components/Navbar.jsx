@@ -8,6 +8,9 @@ function Navbar() {
       <div className="collapse navbar-collapse show">
         <ul className="navbar-nav ms-auto">
           <li className="nav-item">
+          <a className="nav-link" href="/SimplyMed/landing.html">Inicio</a>
+          </li>
+          <li className="nav-item">
             <NavLink className="nav-link" to="/recetas">Recetas</NavLink>
           </li>
           <li className="nav-item">
