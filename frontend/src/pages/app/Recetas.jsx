@@ -4,6 +4,9 @@ import useRecetas from '../../hooks/useRecetas';
 import RecetaCard from "../../components/RecetaCard";
 import Modal from "../../components/Modal";
 
+import { exportJson } from "../../services/recetasService";
+import { downloadBlob } from "../../utils/download";
+
 function Recetas() {;
   //const { recetas } = useContext(RecetaContext);
   const { recetas } = useRecetas();
@@ -33,6 +36,14 @@ function Recetas() {;
           </ul>
         </Modal>
       )}
+
+      <button
+        className="btn btn-outline-secondary"
+        onClick={() => downloadBlob('recetas_${Date.now()}.json', exportJson())}
+      >
+        Exportar JSON
+      </button>
+
     </div>
   );
 }

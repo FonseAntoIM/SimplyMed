@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!--
+    * Seccion de configuracion del proyecto Maven.
+    * Define la version del modelo de objeto del proyecto (Project Object Model).
+    -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--
+    * Seccion de identificacion del proyecto.
+    * Define los identificadores unicos del proyecto.
+    -->
+    <groupId>com.simplymed</groupId>
+    <artifactId>java-client</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!--
+    * Seccion de propiedades.
+    * Define variables de configuracion reutilizables para el proyecto.
+    * Esto facilita la gestion de versiones y la configuracion del compilador.
+    -->
+    <properties>
+        <!--
+        * Indica a Maven que use Java 8 para la compilacion del codigo fuente.
+        * Es la version de Java requerida para la aplicacion.
+        -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <!--
+        * Indica a Maven que el codigo compilado debe ser compatible con la JVM de Java 8.
+        -->
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!--
+        * Especifica la codificacion de los archivos del proyecto, asegurando
+        * una correcta lectura y escritura de caracteres especiales.
+        -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!--
+    * Seccion de dependencias.
+    * Define las librerias externas que el proyecto necesita para compilar y ejecutarse.
+    -->
+    <dependencies>
+        <!--
+        * Dependencia para la libreria Gson, que se utiliza para la
+        * serializacion y deserializacion de objetos Java a formato JSON.
+        * Es una herramienta crucial para el metodo importFromJson.
+        -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+    </dependencies>
+
+    <!--
+    * Seccion de construccion del proyecto.
+    * Define la configuracion de los plugins de Maven para empaquetar,
+    * compilar y otras tareas del ciclo de vida del proyecto.
+    -->
+    <build>
+        <plugins>
+            <!--
+            * Plugin para empaquetar el proyecto en un archivo JAR.
+            * Permite configurar el JAR para que sea directamente ejecutable.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!--
+                            * Establece la clase principal (main class) del proyecto.
+                            * Esta es la clase que se ejecutara cuando se ejecute el JAR.
+                            -->
+                            <mainClass>com.simplymed.client.App</mainClass>
+                        </manifest>
+                    </archive>
+                    <!--
+                    * Define el nombre final del archivo JAR generado.
+                    -->
+                    <finalName>java-client</finalName>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
