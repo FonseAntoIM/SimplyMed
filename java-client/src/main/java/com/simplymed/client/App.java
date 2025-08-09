@@ -153,5 +153,11 @@ public class App {
 
     Opción 5 → guarda recetas.dat (bin)
 
-    Salir (opción 7) y volver a abrir → 6 cargar bin → 2 listar (persistencia OK)
+    Salir (opción 7)
+
+    * Verificar persistencia:
+        Mover recetas.dat a otra ubicación.
+        Volver a abrir.
+        Regresar ubicación de recetas.dat
+        Opción 6 cargar bin → 2 listar (persistencia OK)
 * */

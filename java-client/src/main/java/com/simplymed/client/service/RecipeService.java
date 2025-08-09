@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.concurrent.*;
 
 /**
  * Clase de servicio que gestiona la logica de negocio relacionada con las recetas.
@@ -26,7 +27,7 @@ import java.util.*;
  * </p>
  *
  * @author SimplyMed
- * @version 2.0
+ * @version 3.0
  * @since 2025-08-09
  * @see com.simplymed.client.model.Recipe
  * @see com.simplymed.client.util.JsonUtil
@@ -40,6 +41,9 @@ public class RecipeService {
      * Esta lista actua como el "estado" de la aplicacion en memoria.
      */
     private final List<Recipe> data = new ArrayList<>();
+
+    // Se define un tiempo de espera de 10 segundos para la exportacion de JSON
+    private static final int JSON_EXPORT_TIMEOUT_SECONDS = 10;
 
     /**
      * Devuelve una vista inmodificable de la lista de recetas.
@@ -80,19 +84,23 @@ public class RecipeService {
      * @param incoming Una {@link Collection} de objetos {@link Recipe} a fusionar.
      */
     public void mergeById(Collection<Recipe> incoming) {
+        // Primero, creamos un mapa con los datos actuales para un acceso rapido.
         Map<Long, Recipe> index = new HashMap<>();
         for (Recipe r : data) {
             index.put(r.getId(), r);
         }
 
+        // Luego, iteramos sobre las recetas entrantes.
         for (Recipe r : incoming) {
-            if (index.containsKey(r.getId())) {
-                index.put(r.getId(), r);
-            } else {
-                data.add(r);
-                index.put(r.getId(), r);
-            }
+            // Si la receta ya existe en el mapa (por su ID), la reemplazamos.
+            // Si no existe, la anadimos.
+            index.put(r.getId(), r);
         }
+
+        // Finalmente, limpiamos la lista de datos actual
+        // y la volvemos a llenar con los valores del mapa actualizado.
+        data.clear();
+        data.addAll(index.values());
     }
 
     /**
@@ -140,14 +148,43 @@ public class RecipeService {
     }
 
     /**
-     * Exporta la lista de recetas actual a un archivo JSON.
-     * Este metodo delega la escritura del archivo al metodo de utilidad {@link JsonUtil#writeRecipesJson}.
+     * Exporta la lista de recetas actual a un archivo JSON con un tiempo de espera.
+     * <p>
+     * Este metodo ejecuta la operacion de escritura en un hilo separado. Si la
+     * operacion no se completa dentro del tiempo definido por {@link #JSON_EXPORT_TIMEOUT_SECONDS},
+     * se lanza una {@link IOException} para evitar que la aplicacion se bloquee.
+     * </p>
      *
      * @param target El objeto {@link File} del archivo de destino.
-     * @throws IOException Si ocurre un error de entrada/salida al escribir el archivo.
+     * @throws IOException Si ocurre un error de entrada/salida al escribir el archivo
+     * o si la operacion excede el tiempo de espera.
      */
     public void exportJson(File target) throws IOException {
-        com.simplymed.client.util.JsonUtil.writeRecipesJson(target, data);
+        // Se crea un ExecutorService para ejecutar la tarea en un hilo.
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        try {
+            // Se define la tarea a ejecutar (la exportacion del JSON).
+            Callable<Void> task = () -> {
+                // Se crea una nueva lista para evitar referencias circulares o estados anómalos.
+                List<Recipe> recipesToExport = new ArrayList<>(data);
+                com.simplymed.client.util.JsonUtil.writeRecipesJson(target, recipesToExport);
+                return null;
+            };
+
+            // Se envía la tarea al ejecutor y se espera con un tiempo de espera.
+            Future<Void> future = executor.submit(task);
+            future.get(JSON_EXPORT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+
+        } catch (TimeoutException e) {
+            // Se lanza una excepcion si el tiempo de espera se agota.
+            throw new IOException("El proceso de exportacion de JSON excedio el tiempo de espera de " + JSON_EXPORT_TIMEOUT_SECONDS + " segundos.", e);
+        } catch (InterruptedException | ExecutionException e) {
+            // Se manejan otras excepciones del hilo.
+            throw new IOException("Ocurrio un error al exportar el archivo JSON.", e);
+        } finally {
+            // Se apaga el ejecutor para liberar los recursos del hilo.
+            executor.shutdownNow();
+        }
     }
 
     /**
