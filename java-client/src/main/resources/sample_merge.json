@@ -1,0 +1,14 @@
+{
+    "recetas": [
+      {
+        "id": 1712345678000,
+        "paciente": "Juan Pérez",
+        "fecha": "2025-05-20",
+        "diagnostico": "Migraña (actualizado - replace en merge )",
+        "medicamentos": [
+          { "nombre": "Naproxeno", "dosis": "550mg", "frecuencia": "Cada 12 horas" }
+        ]
+      }
+    ]
+  }
+  

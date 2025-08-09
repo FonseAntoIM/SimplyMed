@@ -1,0 +1,33 @@
+{
+    "recetas": [
+      {
+        "id": 1712345678000,
+        "paciente": "Juan Pérez",
+        "fecha": "2025-05-17",
+        "diagnostico": "Dolor de cabeza",
+        "medicamentos": [
+          { "nombre": "Paracetamol", "dosis": "500mg", "frecuencia": "Cada 8 horas" }
+        ]
+      },
+      {
+        "id": 1712345678001,
+        "paciente": "Ana López",
+        "fecha": "2025-06-01",
+        "diagnostico": "Gripe",
+        "medicamentos": [
+          { "nombre": "Ibuprofeno", "dosis": "200mg", "frecuencia": "Cada 8 horas" },
+          { "nombre": "Ambroxol", "dosis": "30mg", "frecuencia": "Cada 12 horas" }
+        ]
+      },
+      {
+        "id": 1712345678002,
+        "paciente": "Sara Flores",
+        "fecha": "2025-06-10",
+        "diagnostico": "Infección urinaria",
+        "medicamentos": [
+          { "nombre": "Nitrofurantoína", "dosis": "100mg", "frecuencia": "Cada 6 horas" }
+        ]
+      }
+    ]
+  }
+  

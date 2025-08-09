@@ -136,3 +136,22 @@ public class App {
         System.out.println("Estado cargado. Recetas: " + SERVICE.list().size());
     }
 }
+
+/*
+*  PROBAR:
+    Opción 1 → importa sample_multi.json → verás Importadas/mergeadas: 3
+
+    Opción 2 → listar (deben verse 3)
+
+    Opción 1 → importa sample_merge.json → verás Importadas/mergeadas: 1
+
+    Opción 2 → listar (Juan Pérez ahora debe mostrar diagnóstico “Migraña (actualizado)”)
+
+    Opción 3 → exporta recetas_local.json
+
+    Opción 4 → exporta recetas.csv
+
+    Opción 5 → guarda recetas.dat (bin)
+
+    Salir (opción 7) y volver a abrir → 6 cargar bin → 2 listar (persistencia OK)
+* */

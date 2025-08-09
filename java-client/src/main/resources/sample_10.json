@@ -1,0 +1,96 @@
+{
+    "recetas": [
+      {
+        "id": 1712345678000,
+        "paciente": "Juan Pérez",
+        "fecha": "2025-05-17",
+        "diagnostico": "Dolor de cabeza",
+        "medicamentos": [
+          { "nombre": "Paracetamol", "dosis": "500mg", "frecuencia": "Cada 8 horas" }
+        ]
+      },
+      {
+        "id": 1712345678001,
+        "paciente": "Ana López",
+        "fecha": "2025-06-01",
+        "diagnostico": "Gripe",
+        "medicamentos": [
+          { "nombre": "Ibuprofeno", "dosis": "200mg", "frecuencia": "Cada 8 horas" },
+          { "nombre": "Ambroxol", "dosis": "30mg", "frecuencia": "Cada 12 horas" }
+        ]
+      },
+      {
+        "id": 1712345678002,
+        "paciente": "María Gómez",
+        "fecha": "2025-06-10",
+        "diagnostico": "Infección urinaria",
+        "medicamentos": [
+          { "nombre": "Nitrofurantoína", "dosis": "100mg", "frecuencia": "Cada 6 horas" }
+        ]
+      },
+      {
+        "id": 1712345678003,
+        "paciente": "Carlos Ruiz",
+        "fecha": "2025-06-15",
+        "diagnostico": "Hipertensión",
+        "medicamentos": [
+          { "nombre": "Losartán", "dosis": "50mg", "frecuencia": "Cada 24 horas" }
+        ]
+      },
+      {
+        "id": 1712345678004,
+        "paciente": "Laura Méndez",
+        "fecha": "2025-06-20",
+        "diagnostico": "Diabetes tipo 2",
+        "medicamentos": [
+          { "nombre": "Metformina", "dosis": "850mg", "frecuencia": "Cada 12 horas" }
+        ]
+      },
+      {
+        "id": 1712345678005,
+        "paciente": "Pedro Sánchez",
+        "fecha": "2025-06-25",
+        "diagnostico": "Asma",
+        "medicamentos": [
+          { "nombre": "Salbutamol", "dosis": "100mcg", "frecuencia": "Inhalar cada 6 horas" }
+        ]
+      },
+      {
+        "id": 1712345678006,
+        "paciente": "Sofía Torres",
+        "fecha": "2025-07-01",
+        "diagnostico": "Alergia estacional",
+        "medicamentos": [
+          { "nombre": "Loratadina", "dosis": "10mg", "frecuencia": "Cada 24 horas" }
+        ]
+      },
+      {
+        "id": 1712345678007,
+        "paciente": "Diego Fernández",
+        "fecha": "2025-07-05",
+        "diagnostico": "Gastritis",
+        "medicamentos": [
+          { "nombre": "Omeprazol", "dosis": "20mg", "frecuencia": "Cada 24 horas" }
+        ]
+      },
+      {
+        "id": 1712345678008,
+        "paciente": "Lucía Ramírez",
+        "fecha": "2025-07-10",
+        "diagnostico": "Colesterol alto",
+        "medicamentos": [
+          { "nombre": "Atorvastatina", "dosis": "40mg", "frecuencia": "Cada 24 horas" }
+        ]
+      },
+      {
+        "id": 1712345678009,
+        "paciente": "Javier Ortega",
+        "fecha": "2025-07-15",
+        "diagnostico": "Artritis",
+        "medicamentos": [
+          { "nombre": "Diclofenaco", "dosis": "50mg", "frecuencia": "Cada 12 horas" }
+        ]
+      }
+    ]
+  }
+  

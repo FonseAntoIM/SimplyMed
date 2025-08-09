@@ -4,7 +4,7 @@
       "id": 1712345678000,
       "paciente": "Juan Pérez",
       "fecha": "2025-05-17",
-      "diagnostico": "Dolor de cabeza",
+      "diagnostico": "Dolor de cabeza (target a cambiar)",
       "medicamentos": [
         { "nombre": "Paracetamol", "dosis": "500mg", "unidad": "mg", "frecuencia": "Cada 8 horas" }
       ]
