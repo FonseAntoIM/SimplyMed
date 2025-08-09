@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 //import { RecetaContext } from "../context/RecetaContext";
-import useRecetas from '../hooks/useRecetas';
-import RecetaCard from "../components/RecetaCard";
-import Modal from "../components/Modal";
+import useRecetas from '../../hooks/useRecetas';
+import RecetaCard from "../../components/RecetaCard";
+import Modal from "../../components/Modal";
 
 function Recetas() {;
   //const { recetas } = useContext(RecetaContext);

@@ -1,8 +1,8 @@
 import { useState,useContext } from 'react';
 //import { RecetaContext } from '../context/RecetaContext';
-import useRecetas from '../hooks/useRecetas';
+import useRecetas from '../../hooks/useRecetas';
 import { useNavigate } from 'react-router-dom';
-import './NuevaReceta.css';
+import '../../styles/NuevaReceta.css'; // Asegúrate de tener este archivo CSS
 
 function NuevaReceta() {
   const [paciente, setPaciente] = useState('');

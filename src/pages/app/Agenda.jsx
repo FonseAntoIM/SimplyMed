@@ -1,6 +1,6 @@
 //import { useContext } from 'react';
 //import { RecetaContext } from '../context/RecetaContext';
-import useRecetas from '../hooks/useRecetas';
+import useRecetas from '../../hooks/useRecetas';
 
 function Agenda() {
   //const { recetas } = useContext(RecetaContext);

@@ -1,7 +1,7 @@
 /// <reference types="vitest" />
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, test, expect, vi } from 'vitest';
-import NuevaReceta from '../NuevaReceta.jsx';
+import NuevaReceta from '../app/NuevaReceta.jsx';
 import { RecetaContext } from '../../context/RecetaContext';
 import { BrowserRouter } from 'react-router-dom';
 
