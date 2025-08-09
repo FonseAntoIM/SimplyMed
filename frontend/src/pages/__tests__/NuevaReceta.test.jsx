@@ -2,7 +2,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, test, expect, vi } from 'vitest';
 import NuevaReceta from '../app/NuevaReceta.jsx';
-import { RecetaContext } from '../../context/RecetaContext';
+import { RecetaContext } from '../../context/RecetaContext.jsx';
 import { BrowserRouter } from 'react-router-dom';
 
 describe('NuevaReceta', () => {

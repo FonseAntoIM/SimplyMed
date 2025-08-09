@@ -18,8 +18,12 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        {/* Rutas del landing */}
+        {/* Ruta raíz que apunta a Landing */}
+        <Route path="/" element={<Landing />} />
+        {/* Alias opcional para Landing */}
         <Route path="/landing" element={<Landing />} />
+
+        {/* Rutas del landing */}
         <Route path="/signin" element={<SignIn />} />
         <Route path="/register" element={<Register />} />
 

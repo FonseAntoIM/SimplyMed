@@ -6,11 +6,11 @@
   "homepage": "https://fonseantoim.github.io/simplymed",
 
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "vite --config frontend/vite.config.js",
+    "build": "vite build --config frontend/vite.config.js",
+    "test": "vitest --config frontend/vitest.setup.js",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "vitest",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
