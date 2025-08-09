@@ -1,4 +1,3 @@
-// src/pages/app/Recetas.jsx
 import { useState } from 'react';
 import useRecetas from '../../hooks/useRecetas';
 import RecetaCard from '../../components/RecetaCard';
@@ -31,7 +30,7 @@ function Recetas() {
       alert(`❌ Error importando JSON: ${err.message}`);
     } finally {
       setBusy(false);
-      e.target.value = ''; // resetea input para volver a seleccionar el mismo archivo si hace falta
+      e.target.value = ''; // permite seleccionar el mismo archivo de nuevo
     }
   };
 

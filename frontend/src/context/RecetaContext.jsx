@@ -8,13 +8,11 @@ const recetaReducer = (state, action) => {
     case 'AGREGAR_RECETA':
       return [...state, action.payload];
 
-    case 'MERGE_RECETAS':
-      // Fusiona sin duplicar (usa id como clave)
+    case 'MERGE_RECETAS': {
       const map = new Map(state.map(r => [r.id, r]));
-      for (const r of action.payload) {
-        map.set(r.id, r); // reemplaza si existe, agrega si no
-      }
+      for (const r of action.payload) map.set(r.id, r); // reemplaza si existe, agrega si no
       return Array.from(map.values());
+    }
 
     default:
       return state;
