@@ -1,0 +1,40 @@
+body {
+    font-family: system-ui, Arial, sans-serif;
+    margin: 2rem;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: .5rem;
+}
+
+nav a {
+    margin-left: 1rem;
+}
+
+label {
+    display: block;
+    margin-top: .75rem;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: .5rem;
+}
+
+button {
+    margin-top: 1rem;
+}

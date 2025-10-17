@@ -1,0 +1,41 @@
+<!-- Vistas Thymeleaf
+     recipe-form.html
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nueva receta</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+
+<body>
+    <header>
+        <h1>Crear receta</h1>
+    </header>
+    <main>
+        <form th:action="@{/recipes}" th:object="${recipe}" method="post">
+            <label>Paciente</label>
+            <input type="text" th:field="*{patientName}" required />
+            <span th:if="${#fields.hasErrors('patientName')}" th:errors="*{patientName}" class="error">Error de validación aquí</span>
+
+
+            <label>Médico</label>
+            <input type="text" th:field="*{doctorName}" required />
+
+
+            <label>Fecha</label>
+            <input type="date" th:field="*{date}" required />
+
+
+            <label>Notas</label>
+            <textarea th:field="*{notes}"></textarea>
+
+
+            <button type="submit">Guardar</button>
+        </form>
+    </main>
+</body>
+
+</html>

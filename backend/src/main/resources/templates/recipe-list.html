@@ -1,0 +1,46 @@
+<!-- Vistas Thymeleaf
+     recipe-list.html
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Recipes</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+
+<body>
+    <header>
+        <h1>SimplyMed — Recipes</h1>
+        <nav>
+            <a th:href="@{/recipes/new}">Nueva receta</a>
+        </nav>
+    </header>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Paciente</th>
+                    <th>Médico</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="r : ${recipes}">
+                    <td th:text="${r.id}"></td>
+                    <td th:text="${r.patientName}"></td>
+                    <td th:text="${r.doctorName}"></td>
+                    <td th:text="${r.date}"></td>
+                    <td>
+                        <a th:href="@{'/recipes/' + ${r.id} + '/delete'}">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+
+</html>
