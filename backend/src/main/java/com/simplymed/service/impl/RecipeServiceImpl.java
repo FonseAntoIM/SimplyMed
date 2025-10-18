@@ -6,7 +6,10 @@ import com.simplymed.repository.RecipeRepository;
 import com.simplymed.service.RecipeService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -46,8 +49,16 @@ public class RecipeServiceImpl implements RecipeService {
     public List<Recipe> merge(List<Recipe> incoming) {
         List<Recipe> result = new ArrayList<>();
         for (Recipe r : incoming) {
-            if (r.getId() != null && repo.existsById(r.getId())) {
-                Recipe existing = repo.findById(r.getId()).orElseThrow();
+            Optional<Recipe> existingOpt = Optional.empty();
+            if (r.getId() != null) {
+                existingOpt = repo.findById(r.getId());
+            }
+            if (existingOpt.isEmpty()) {
+                existingOpt = repo.findByPatientNameAndDoctorNameAndDate(
+                        r.getPatientName(), r.getDoctorName(), r.getDate());
+            }
+            if (existingOpt.isPresent()) {
+                Recipe existing = existingOpt.get();
                 existing.setPatientName(r.getPatientName());
                 existing.setDoctorName(r.getDoctorName());
                 existing.setDate(r.getDate());
@@ -60,6 +71,7 @@ public class RecipeServiceImpl implements RecipeService {
                 }
                 result.add(repo.save(existing));
             } else {
+                r.setId(null);
                 result.add(save(r));
             }
         }

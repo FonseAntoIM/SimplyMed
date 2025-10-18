@@ -1,4 +1,4 @@
-spring:
+﻿spring:
   datasource:
     url: jdbc:h2:mem:simplymed;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driverClassName: org.h2.Driver
@@ -9,14 +9,19 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+    defer-datasource-initialization: true
     properties:
       hibernate:
         format_sql: true
 
+  sql:
+    init:
+      mode: always
+
   thymeleaf:
     cache: false
 
-  # Consola H2 - Nota: la consola H2 debe ir aquí, no al final
+  # Consola H2 - Nota: la consola H2 debe ir aqui, no al final
   h2:
     console:
       enabled: true

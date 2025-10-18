@@ -1,5 +1,4 @@
 ﻿import { createContext, useCallback, useEffect, useMemo, useState } from "react";
-import recetasMock from "../data/recetasMock";
 import {
   listRecipes,
   createRecipe,
@@ -53,20 +52,14 @@ const dtoToLegacy = (dto = {}) => ({
   })),
 });
 
-const mockToDto = (mock = {}) => {
-  const dto = legacyToDto({
-    ...mock,
-    medicamentos: (mock.medicamentos ?? []).map((med) => ({
-      ...med,
-      frequencyPerDay: parseFrequency(
-        med.frecuenciaPerDay ?? med.frecuencia ?? med.frequencyPerDay
-      ),
-      instructions: med.frecuencia ?? med.instructions ?? "",
-    })),
+const sanitizeForImport = (listado = []) =>
+  listado.map((item) => {
+    const dto = legacyToDto(item);
+    if (!item.id) {
+      dto.id = null;
+    }
+    return dto;
   });
-  dto.id = undefined;
-  return dto;
-};
 
 export const RecetaProvider = ({ children }) => {
   const [recetas, setRecetas] = useState([]);
@@ -77,14 +70,7 @@ export const RecetaProvider = ({ children }) => {
     try {
       setLoading(true);
       const envelope = await listRecipes();
-      let current = envelope?.recipes ?? [];
-
-      if (current.length === 0 && recetasMock.length > 0) {
-        const seeded = await importRecipes(recetasMock.map(mockToDto));
-        current = seeded ?? [];
-      }
-
-      setRecetas(current.map(dtoToLegacy));
+      setRecetas((envelope?.recipes ?? []).map(dtoToLegacy));
       setError(null);
     } catch (err) {
       setError(err);
@@ -109,8 +95,7 @@ export const RecetaProvider = ({ children }) => {
 
   const mergeRecetas = useCallback(
     async (listado) => {
-      const payload = (listado ?? []).map(legacyToDto);
-      await importRecipes(payload);
+      await importRecipes(sanitizeForImport(listado));
       await refresh();
     },
     [refresh]
