@@ -1,9 +1,12 @@
 package com.simplymed.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class MedicationDTO {
     public Long id;
-    public String name;
-    public String dosage;
-    public Integer frequencyPerDay;
+    @NotBlank public String name;
+    @NotBlank public String dosage;
+    @NotNull public Integer frequencyPerDay;
     public String instructions;
 }

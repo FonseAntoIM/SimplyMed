@@ -18,16 +18,16 @@
         <form th:action="@{/recipes}" th:object="${recipe}" method="post">
             <label>Paciente</label>
             <input type="text" th:field="*{patientName}" required />
-            <span th:if="${#fields.hasErrors('patientName')}" th:errors="*{patientName}" class="error">Error de validación aquí</span>
+            <span th:if="${#fields.hasErrors('patientName')}" th:errors="*{patientName}" style="color:red" class="error">Error de validación aquí</span>
 
 
             <label>Médico</label>
             <input type="text" th:field="*{doctorName}" required />
-
+            <div th:if="${#fields.hasErrors('doctorName')}" th:errors="*{doctorName}" style="color:red"></div>            
 
             <label>Fecha</label>
             <input type="date" th:field="*{date}" required />
-
+            <div th:if="${#fields.hasErrors('date')}" th:errors="*{date}" style="color:red"></div>
 
             <label>Notas</label>
             <textarea th:field="*{notes}"></textarea>

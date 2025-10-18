@@ -1,10 +1,12 @@
 //import { useContext } from 'react';
 //import { RecetaContext } from '../context/RecetaContext';
 import useRecetas from '../../hooks/useRecetas';
+//import useRecipes from "../../hooks/useRecipes";
 
 function Expediente() {
   //const { recetas } = useContext(RecetaContext);
   const { recetas } = useRecetas();
+  //const {recipes} = useRecipes
 
   // Agrupar por paciente
   const porPaciente = recetas.reduce((acc, receta) => {

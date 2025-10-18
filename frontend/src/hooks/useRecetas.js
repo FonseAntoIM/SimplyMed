@@ -1,8 +1,30 @@
-import { useContext } from 'react';
-import { RecetaContext } from '../context/RecetaContext';
+﻿import { useContext } from "react";
+import { RecetaContext } from "../context/RecetaContext.jsx";
 
 export default function useRecetas() {
-  const { recetas, agregarReceta, mergeRecetas } = useContext(RecetaContext);
-  const total = recetas.length;
-  return { recetas, total, agregarReceta, mergeRecetas };
+  const context = useContext(RecetaContext);
+  if (!context) {
+    throw new Error("useRecetas debe usarse dentro de un RecetaProvider");
+  }
+
+  const {
+    recetas,
+    loading,
+    error,
+    refresh,
+    agregarReceta,
+    mergeRecetas,
+    eliminarReceta,
+  } = context;
+
+  return {
+    recetas,
+    total: recetas.length,
+    loading,
+    error,
+    refresh,
+    agregarReceta,
+    mergeRecetas,
+    eliminarReceta,
+  };
 }
