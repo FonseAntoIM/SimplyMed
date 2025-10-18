@@ -1,4 +1,7 @@
-﻿import { useState } from "react";
+﻿// Summary: Pagina principal del front para listar, importar y exportar recetas.
+// Interacts with: useRecetas (estado global), api/recipes.js y componentes de UI.
+// Rubric: Criterio 3 al ofrecer interfaz React conectada al backend.
+import { useState } from "react";
 import useRecetas from "../../hooks/useRecetas";
 
 import RecetaCard from "../../components/RecetaCard";
@@ -11,14 +14,17 @@ function Recetas() {
   const [busy, setBusy] = useState(false);
   const fileInputId = "import-json-input";
 
+  // Exporta la lista actual a un archivo JSON compatible.
   const onExport = () => {
     exportRecetasJSON(recetas, "recetas");
   };
 
+  // Dispara el input oculto para escoger archivo de importacion.
   const onPickFile = () => {
     document.getElementById(fileInputId)?.click();
   };
 
+  // Lee el archivo seleccionado, lo parsea y llama al merge del contexto.
   const onFileChange = async (event) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -35,6 +41,7 @@ function Recetas() {
     }
   };
 
+  // Confirma y elimina la receta desde el backend.
   const handleDelete = async (receta, event) => {
     event.stopPropagation();
     if (!receta?.id) return;

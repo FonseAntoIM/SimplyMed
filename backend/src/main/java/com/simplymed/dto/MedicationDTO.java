@@ -1,3 +1,6 @@
+/*
+ * Summary: DTO REST para un medicamento; evita exponer la entidad.
+ */
 package com.simplymed.dto;
 
 import jakarta.validation.constraints.NotBlank;

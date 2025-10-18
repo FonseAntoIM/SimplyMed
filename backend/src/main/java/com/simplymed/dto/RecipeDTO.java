@@ -1,3 +1,6 @@
+/*
+ * Summary: DTO REST para recetas, incluye validaciones y lista de medicamentos.
+ */
 package com.simplymed.dto;
 
 import jakarta.validation.Valid;

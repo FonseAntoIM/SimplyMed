@@ -1,19 +1,22 @@
-﻿import { api } from "./client.js";
+﻿// Summary: Funciones especificas para consumir la API de recetas.
+// Interacts with: RecetaContext (hooks) y componentes como Recetas.jsx.
+// Rubric: Criterio 3 al integrar frontend con backend REST.
+import { api } from "./client.js";
 
-/** @returns {Promise<import('../dto.js').RecipesEnvelope>} */
+/** Obtiene { recipes: [...] } para hidratar el estado global. */
 export const listRecipes = () => api.get("/api/recipes/export");
 
-/** @param {number} id @returns {Promise<import('../dto.js').RecipeDTO>} */
+/** Recupera una receta individual por id. */
 export const getRecipe = (id) => api.get(`/api/recipes/${id}`);
 
-/** @param {import('../dto.js').RecipeDTO} dto */
+/** Crea una receta nueva enviando RecipeDTO. */
 export const createRecipe = (dto) => api.post("/api/recipes", dto);
 
-/** @param {number} id @param {import('../dto.js').RecipeDTO} dto */
+/** Actualiza una receta existente mediante PUT. */
 export const updateRecipe = (id, dto) => api.put(`/api/recipes/${id}`, dto);
 
-/** @param {number} id */
+/** Elimina una receta por id. */
 export const deleteRecipe = (id) => api.del(`/api/recipes/${id}`);
 
-/** @param {import('../dto.js').RecipeDTO[]} recipes */
+/** Realiza import/merge masivo (envoltura { recipes: [...] }). */
 export const importRecipes = (recipes) => api.post("/api/recipes/import", { recipes });

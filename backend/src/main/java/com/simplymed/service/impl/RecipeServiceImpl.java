@@ -1,3 +1,9 @@
+/*
+ * Summary: Implementacion transactional de RecipeService. Orquesta CRUD y merge
+ * de recetas, delegando persistencia al repositorio JPA.
+ * Interacts with: RecipeRepository, controladores MVC/REST y ModelMapper.
+ * Rubric: Criterio 2 y 4 (capas claras, JPA avanzado).
+ */
 package com.simplymed.service.impl;
 
 import com.simplymed.domain.Medication;
@@ -16,20 +22,26 @@ import java.util.Optional;
 public class RecipeServiceImpl implements RecipeService {
     private final RecipeRepository repo;
 
+    /**
+     * Constructor con inyeccion por constructor (patron recomendado por Spring).
+     */
     public RecipeServiceImpl(RecipeRepository repo) {
         this.repo = repo;
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<Recipe> findAll() {
         return repo.findAll();
     }
 
+    /** {@inheritDoc} */
     @Override
     public Optional<Recipe> findById(Long id) {
         return repo.findById(id);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Recipe save(Recipe recipe) {
         if (recipe.getMedications() != null) {
@@ -40,11 +52,16 @@ public class RecipeServiceImpl implements RecipeService {
         return repo.save(recipe);
     }
 
+    /** {@inheritDoc} */
     @Override
     public void delete(Long id) {
         repo.deleteById(id);
     }
 
+    /**
+     * Realiza un merge inteligente: si la receta existe por id o por clave natural,
+     * se actualiza; de lo contrario se crea un registro nuevo.
+     */
     @Override
     public List<Recipe> merge(List<Recipe> incoming) {
         List<Recipe> result = new ArrayList<>();

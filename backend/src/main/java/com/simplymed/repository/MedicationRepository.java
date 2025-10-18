@@ -1,3 +1,6 @@
+/*
+ * Summary: JpaRepository para Medication (operaciones CRUD).
+ */
 package com.simplymed.repository;
 
 import com.simplymed.domain.Medication;

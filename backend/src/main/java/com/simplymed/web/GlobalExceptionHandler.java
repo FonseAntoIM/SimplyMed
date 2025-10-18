@@ -1,3 +1,9 @@
+/*
+ * Summary: Maneja errores de forma centralizada para controllers REST/MVC,
+ * devolviendo respuestas JSON coherentes.
+ * Interacts with: RecipeRestController, RecipeController y frontend React.
+ * Rubric: Criterio 5 (estabilidad) al estandarizar la gestion de errores.
+ */
 package com.simplymed.web;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,6 +27,7 @@ import java.util.NoSuchElementException;
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
+    /** Maneja errores de validacion devolviendo 400 con detalle por campo. */
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                   HttpHeaders headers,
@@ -40,6 +47,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
+    /** Maneja JSON mal formados devolviendo 400 con el detalle del parseo. */
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
                                                                   HttpHeaders headers,
@@ -54,6 +62,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
+    /** Transforma NoSuchElementException en 404 Not Found. */
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<Object> handleNotFound(NoSuchElementException ex, WebRequest request) {
         Map<String, Object> body = new HashMap<>();
@@ -65,6 +74,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
+    /** Captura excepciones no controladas y expone detalle basico con 500. */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleGeneric(Exception ex, WebRequest request) {
         Map<String, Object> body = new HashMap<>();

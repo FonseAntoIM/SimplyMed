@@ -1,3 +1,6 @@
+/*
+ * Summary: JpaRepository para Recipe con búsqueda por paciente/doctor/fecha.
+ */
 package com.simplymed.repository;
 
 import com.simplymed.domain.Recipe;

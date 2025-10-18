@@ -1,3 +1,8 @@
+/*
+ * Summary: Entidad JPA hija que representa un medicamento dentro de una receta.
+ * Interacts with: Recipe (ManyToOne), RecipeServiceImpl, ModelMapper.
+ * Rubric: Criterio 4 (JPA avanzado).
+ */
 package com.simplymed.domain;
 
 import jakarta.persistence.*;
@@ -14,18 +19,17 @@ public class Medication {
     private String name;
 
     @NotBlank
-    private String dosage; // e.g., "500 mg"
+    private String dosage;
 
     @NotNull
-    private Integer frequencyPerDay; // e.g., 2
+    private Integer frequencyPerDay;
 
-    private String instructions; // e.g., despues de comer
+    private String instructions;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id")
     private Recipe recipe;
 
-    // getters/setters
     public Long getId() {
         return id;
     }

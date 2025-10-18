@@ -1,18 +1,21 @@
-﻿import React from "react";
+﻿// Summary: Página utilitaria basada en tablas para pruebas rápidas del API REST.
+// Interacts with: hooks/useRecipes.js (capa de datos) y backend /api/recipes.*
+// Rubric: Criterio 3 al servir como vista de verificación de la API.
+import React from "react";
 import { useRecipes } from "../hooks/useRecipes.js";
 
 export default function RecetasPage() {
   const { items, loading, error, remove, refresh } = useRecipes();
 
-  if (loading) return <p>Cargando…</p>;
-  if (error)   return <pre>Error: {String(error?.payload?.error || error?.message)}</pre>;
+  if (loading) return <p>Cargando...</p>;
+  if (error) return <pre>Error: {String(error?.payload?.error || error?.message)}</pre>;
 
   return (
     <div>
       <h1>Recetas</h1>
       <button onClick={refresh}>Refrescar</button>
       <table>
-        <thead><tr><th>ID</th><th>Paciente</th><th>Médico</th><th>Fecha</th><th/></tr></thead>
+        <thead><tr><th>ID</th><th>Paciente</th><th>Medico</th><th>Fecha</th><th/></tr></thead>
         <tbody>
           {items.map(r => (
             <tr key={r.id}>

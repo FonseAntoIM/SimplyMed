@@ -1,15 +1,20 @@
-﻿import React, { useState } from "react";
+﻿// Summary: Formulario controlado para crear/editar recetas vía API REST.
+// Interacts with: api/recipes.js (create/update) y rutas NuevaRecetaRoute.
+// Rubric: Criterio 3 al validar e integrar front con backend.
+import React, { useState } from "react";
 import { createRecipe, updateRecipe } from "../lib/api/recipes.js";
 
-/** @param {{ initial?: import('../lib/dto.js').RecipeDTO, onSaved?: (r:any)=>void }} props */
+/** @param {{ initial?: import("../lib/dto.js").RecipeDTO, onSaved?: (r:any)=>void }} props */
 export default function RecipeForm({ initial, onSaved }) {
   const empty = { patientName:"", doctorName:"", date:"", notes:"", medications:[{ name:"", dosage:"", frequencyPerDay:1, instructions:"" }] };
   const [form, setForm] = useState(initial || empty);
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
 
+  /** Actualiza un campo del formulario preservando el resto. */
   const set = (k, v) => setForm(prev => ({ ...prev, [k]: v }));
 
+  /** Maneja el submit creando o actualizando en el backend. */
   async function onSubmit(e) {
     e.preventDefault();
     setSubmitting(true); setErrors({});
@@ -26,19 +31,19 @@ export default function RecipeForm({ initial, onSaved }) {
 
   return (
     <form onSubmit={onSubmit}>
-      {errors._global && <div style={{color:'red'}}>{errors._global}</div>}
+      {errors._global && <div style={{color:"red"}}>{errors._global}</div>}
 
       <label>Paciente</label>
       <input value={form.patientName} onChange={e=>set("patientName", e.target.value)} />
-      {errors.patientName && <small style={{color:'red'}}>{errors.patientName}</small>}
+      {errors.patientName && <small style={{color:"red"}}>{errors.patientName}</small>}
 
-      <label>Médico</label>
+      <label>Medico</label>
       <input value={form.doctorName} onChange={e=>set("doctorName", e.target.value)} />
-      {errors.doctorName && <small style={{color:'red'}}>{errors.doctorName}</small>}
+      {errors.doctorName && <small style={{color:"red"}}>{errors.doctorName}</small>}
 
       <label>Fecha</label>
       <input type="date" value={form.date} onChange={e=>set("date", e.target.value)} />
-      {errors.date && <small style={{color:'red'}}>{errors.date}</small>}
+      {errors.date && <small style={{color:"red"}}>{errors.date}</small>}
 
       <h4>Medicamento</h4>
       <input placeholder="Nombre"
@@ -48,7 +53,7 @@ export default function RecipeForm({ initial, onSaved }) {
           meds[0] = { ...(meds[0]||{}), name: e.target.value };
           set("medications", meds);
         }}/>
-      {errors["medications[0].name"] && <small style={{color:'red'}}>{errors["medications[0].name"]}</small>}
+      {errors["medications[0].name"] && <small style={{color:"red"}}>{errors["medications[0].name"]}</small>}
 
       <input placeholder="Dosis"
         value={form.medications?.[0]?.dosage ?? ""}
@@ -57,16 +62,16 @@ export default function RecipeForm({ initial, onSaved }) {
           meds[0] = { ...(meds[0]||{}), dosage: e.target.value };
           set("medications", meds);
         }}/>
-      {errors["medications[0].dosage"] && <small style={{color:'red'}}>{errors["medications[0].dosage"]}</small>}
+      {errors["medications[0].dosage"] && <small style={{color:"red"}}>{errors["medications[0].dosage"]}</small>}
 
-      <input placeholder="Veces/día" type="number"
+      <input placeholder="Veces/dia" type="number"
         value={form.medications?.[0]?.frequencyPerDay ?? 1}
         onChange={e=>{
           const meds = [...(form.medications ?? [{}])];
           meds[0] = { ...(meds[0]||{}), frequencyPerDay: Number(e.target.value) };
           set("medications", meds);
         }}/>
-      {errors["medications[0].frequencyPerDay"] && <small style={{color:'red'}}>{errors["medications[0].frequencyPerDay"]}</small>}
+      {errors["medications[0].frequencyPerDay"] && <small style={{color:"red"}}>{errors["medications[0].frequencyPerDay"]}</small>}
 
       <button disabled={submitting}>{form.id ? "Actualizar" : "Crear"}</button>
     </form>

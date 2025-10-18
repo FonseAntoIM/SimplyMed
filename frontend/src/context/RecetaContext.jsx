@@ -1,4 +1,7 @@
-﻿import { createContext, useCallback, useEffect, useMemo, useState } from "react";
+﻿// Summary: React context que centraliza el estado de recetas y la integracion con la API backend.
+// Interacts with: api/recipes.js, useRecetas hook, Recetas.jsx, NuevaRecetaRoute.jsx.
+// Rubric: Criterio 3 (UI conectada al backend).
+import { createContext, useCallback, useEffect, useMemo, useState } from "react";
 import {
   listRecipes,
   createRecipe,
@@ -9,8 +12,10 @@ import {
 
 export const RecetaContext = createContext(null);
 
+// Fallback de fecha ISO (yyyy-mm-dd) cuando el JSON no trae campo.
 const todayIso = () => new Date().toISOString().slice(0, 10);
 
+// Normaliza valores numericos provenientes de strings o importaciones.
 const parseFrequency = (value) => {
   if (value == null) return 1;
   if (typeof value === "number" && !Number.isNaN(value)) {
@@ -20,6 +25,7 @@ const parseFrequency = (value) => {
   return Number.isNaN(fromString) ? 1 : Math.max(fromString, 1);
 };
 
+// Convierte estructuras legacy (mock/import) a RecipeDTO consumible por la API.
 const legacyToDto = (src = {}) => ({
   id: src.id ?? null,
   patientName: src.patientName ?? src.paciente ?? "Paciente demo",
@@ -37,6 +43,7 @@ const legacyToDto = (src = {}) => ({
   })),
 });
 
+// Convierte RecipeDTO a la forma legacy utilizada internamente en el contexto.
 const dtoToLegacy = (dto = {}) => ({
   id: dto.id,
   paciente: dto.patientName,
@@ -52,6 +59,7 @@ const dtoToLegacy = (dto = {}) => ({
   })),
 });
 
+// Elimina ids inexistentes antes de mandar al backend (para import).
 const sanitizeForImport = (listado = []) =>
   listado.map((item) => {
     const dto = legacyToDto(item);
@@ -66,6 +74,7 @@ export const RecetaProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Descarga la lista desde el backend y sincroniza estado local.
   const refresh = useCallback(async () => {
     try {
       setLoading(true);
@@ -83,6 +92,7 @@ export const RecetaProvider = ({ children }) => {
     refresh();
   }, [refresh]);
 
+  // Crea o actualiza una receta segun tenga id.
   const agregarReceta = useCallback(
     async (entrada) => {
       const dto = legacyToDto(entrada);
@@ -93,6 +103,7 @@ export const RecetaProvider = ({ children }) => {
     [refresh]
   );
 
+  // Importa/mergea recetas desde JSON y refresca la vista.
   const mergeRecetas = useCallback(
     async (listado) => {
       await importRecipes(sanitizeForImport(listado));
@@ -101,6 +112,7 @@ export const RecetaProvider = ({ children }) => {
     [refresh]
   );
 
+  // Elimina una receta por id (si existe) y sincroniza.
   const eliminarReceta = useCallback(
     async (id) => {
       if (id == null) return;

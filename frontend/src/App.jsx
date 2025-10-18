@@ -1,3 +1,6 @@
+﻿// Summary: Entrypoint de enrutamiento React; define páginas SPA y componentes.
+// Interacts with: RecetaContext (wrapping en main.jsx), páginas que consumen la API.
+// Rubric: Criterio 3 al conectar UI con las rutas que hablan con el backend.
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";

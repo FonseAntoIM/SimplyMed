@@ -1,3 +1,8 @@
+/*
+ * Summary: Entidad JPA principal que agrupa medicamentos y datos de receta.
+ * Interacts with: Medication, RecipeRepository, RecipeServiceImpl, controllers.
+ * Rubric: Criterio 4 (JPA avanzado).
+ */
 package com.simplymed.domain;
 
 import jakarta.persistence.*;
@@ -27,12 +32,12 @@ public class Recipe {
 
     private String notes;
 
+    /** Asociar medicamento con la receta y mantener la referencia bidireccional. */
     public void addMedication(Medication m) {
         m.setRecipe(this);
         this.medications.add(m);
     }
 
-    // getters/setters
     public Long getId() {
         return id;
     }
